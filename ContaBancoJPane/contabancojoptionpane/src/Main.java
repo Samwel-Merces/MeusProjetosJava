@@ -30,7 +30,8 @@ public class Main {
     switch (op) {
         case 0:
             try { String nome = JOptionPane.showInputDialog(null, "Digite o nome do Titular");
-            c1.criarConta()
+            
+            c1.criarConta();
 
                 
             } catch (Exception e) {

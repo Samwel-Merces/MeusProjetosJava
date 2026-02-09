@@ -16,12 +16,12 @@ public class ContaBanco {
     }
 
 
-    public void Sacar(float valor){
+    public void sacar(float valor){
         if(!this.ativo){
             throw new IllegalArgumentException("Erro! Conta Inativa");
         }
 
-        if(valor <=0){
+        if(valor <=0 || valor > this.saldo){
             throw new IllegalArgumentException("Erro! Valor de Saque invalido");
         }
 
@@ -30,41 +30,45 @@ public class ContaBanco {
        
     }
 
-    public String depositar(float valor){
+    public void depositar(float valor){
         if(!this.ativo){
-            return "Erro! Conta Fechada";
+            throw new IllegalArgumentException("Erro ao Depositar! Conta Inativa");
         }
-        if(valor >= 0){
-            return "Valor Invalido";
+        if(valor <= 0){
+            throw new IllegalArgumentException("Valor Invalido!!");
         }
         this.setSaldo(this.getSaldo() + valor);
-        return "Deposito no valo de R$" + valor + " Realizado com Sucesso!";
+        
     }
 
 
-    public String criarConta(){
+    public void criarConta(String titular, String tipo){
         if(this.ativo){
-            return "Conta já está ativa";
+            throw  new IllegalArgumentException("Conta já está Ativa");
         }
         this.setTitular(titular);
-        return "Titular Definido com Sucesso!";
-        
+        this.setTipo(tipo);
+        this.setAtivo(true);
     }
 
     public String exibirDetalhes(){
         String aux;
-        if(this.ativo){
-            aux = "Ativa";
+        aux = this.ativo ? "Ativa" : "Desativada";
+        // if(this.ativo){
+        //     aux = "Ativa";
 
-        }else{
-            aux = "Desativada";
-        }
+        // }else{
+        //     aux = "Desativada";
+        // }
         return "Titular da Conta: " + this.getTitular() +
                 "\nNumero Da Conta: " + this.getNumeroConta() +
                 "\nTipo de Conta" + this.getTipo() +
                 "\nSaldo da Conta: R$" + this.getSaldo() +
                 "\nStatus da Conta: " + aux; 
     }
+
+
+    //METODOS ESPECIAIS
 
 
 
@@ -80,22 +84,25 @@ public class ContaBanco {
         
     }
 
+
     public String getTipo() {
         return tipo;
     }
 
-    public String setTipo(String tipo) {
-        if(tipo.equalsIgnoreCase("CC")){
-            this.tipo = "CC";
-            return "Conta Corrente Definida";
-        }else if(tipo.equalsIgnoreCase("CP")){
-            this.tipo = "CP";
-            return "Conta Poupança Definida";
-        }else{
-            return "Tipo Invalido";
-        }
-        
+    public void setTipo(String tipo) {
+    if (tipo == null) {
+        throw new IllegalArgumentException("Tipo de conta inválido");
     }
+
+    if (tipo.equalsIgnoreCase("CC")) {
+        this.tipo = "CC";
+    } else if (tipo.equalsIgnoreCase("CP")) {
+        this.tipo = "CP";
+    } else {
+        throw new IllegalArgumentException("Tipo de conta inválido (use CC ou CP)");
+    }
+    }
+
 
     public int getNumeroConta() {
         return numeroConta;
