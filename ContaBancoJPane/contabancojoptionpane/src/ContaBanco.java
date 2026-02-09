@@ -12,31 +12,33 @@ public class ContaBanco {
     public ContaBanco() {
         Random rd = new Random();
         this.numeroConta = rd.nextInt(99999) + 11111;
+        this.saldo = 0f;
     }
 
 
-    public String Sacar(float valor){
-       if(this.ativo){
-         if(valor >=0 ){
-            return "Valor Invalido!";
+    public void Sacar(float valor){
+        if(!this.ativo){
+            throw new IllegalArgumentException("Erro! Conta Inativa");
         }
-        this.setSaldo(this.getSaldo() + valor);
-        return "Saque no valor de: " + valor + " Realizado com Sucesso!!";
-       } 
-       return "Impossivel Sacar, Conta Fechada!";
+
+        if(valor <=0){
+            throw new IllegalArgumentException("Erro! Valor de Saque invalido");
+        }
+
+        this.setSaldo(this.getSaldo() - valor);
+
+       
     }
 
     public String depositar(float valor){
-        if(this.ativo){
-            if(valor >=0){
-            return "Valor Invalido!!";
-        } else if(valor > saldo){
-            return "Saldo Insuficiente!!";
+        if(!this.ativo){
+            return "Erro! Conta Fechada";
         }
-        this.setSaldo(this.getSaldo() - valor);
-        return "Deposito no Valor de: " + valor + " Realizado com Sucesso!";
+        if(valor >= 0){
+            return "Valor Invalido";
         }
-        return "Impossivel Depositar, Conta Fechada!";
+        this.setSaldo(this.getSaldo() + valor);
+        return "Deposito no valo de R$" + valor + " Realizado com Sucesso!";
     }
 
 
@@ -45,7 +47,8 @@ public class ContaBanco {
             return "Conta já está ativa";
         }
         this.setTitular(titular);
-        return "";
+        return "Titular Definido com Sucesso!";
+        
     }
 
     public String exibirDetalhes(){
@@ -57,10 +60,10 @@ public class ContaBanco {
             aux = "Desativada";
         }
         return "Titular da Conta: " + this.getTitular() +
-                "Numero Da Conta: " + this.getNumeroConta() +
-                "Tipo de Conta" + this.getTipo() +
-                "Saldo da Conta: R$" + this.getSaldo() +
-                "Status da Conta: " + aux; 
+                "\nNumero Da Conta: " + this.getNumeroConta() +
+                "\nTipo de Conta" + this.getTipo() +
+                "\nSaldo da Conta: R$" + this.getSaldo() +
+                "\nStatus da Conta: " + aux; 
     }
 
 
@@ -69,13 +72,12 @@ public class ContaBanco {
         return titular;
     }
 
-    public String setTitular(String titular) {
-        if(titular.isEmpty()){
-            return "Por favor Insira um nome valido";
+    public void setTitular(String titular) {
+        if(titular == null || titular.isBlank()){
+            throw new IllegalArgumentException("Nome Invalido");
         }
         this.titular = titular;
-            return "";
-
+        
     }
 
     public String getTipo() {

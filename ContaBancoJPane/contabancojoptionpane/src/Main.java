@@ -4,7 +4,16 @@ import javax.swing.JOptionPane;
 public class Main {
     public static void main(String[] args) throws Exception {
 
+
         String men [] = {"Abrir Conta","Depositar","Sacar","Exibir Dados","Fechar Conta"};
+
+        ContaBanco c1 = new ContaBanco();
+
+
+    Boolean cont = true;
+    while (cont) { 
+        
+    
 
 
     int op = JOptionPane.showOptionDialog(null,
@@ -20,6 +29,12 @@ public class Main {
 
     switch (op) {
         case 0:
+            try { String nome = JOptionPane.showInputDialog(null, "Digite o nome do Titular");
+            c1.criarConta()
+
+                
+            } catch (Exception e) {
+            }
             
             break;
         case 1:
@@ -41,4 +56,5 @@ public class Main {
         
         
     }
+}
 }
