@@ -44,7 +44,7 @@ public class ContaBanco {
 
     public void criarConta(String titular, String tipo){
         if(this.ativo){
-            throw  new IllegalArgumentException("Conta já está Ativa");
+            throw  new IllegalArgumentException("Não é Possivel Abrir Mais de 1 Conta");
         }
         this.setTitular(titular);
         this.setTipo(tipo);
@@ -54,12 +54,7 @@ public class ContaBanco {
     public String exibirDetalhes(){
         String aux;
         aux = this.ativo ? "Ativa" : "Desativada";
-        // if(this.ativo){
-        //     aux = "Ativa";
-
-        // }else{
-        //     aux = "Desativada";
-        // }
+       
         return "Titular da Conta: " + this.getTitular() +
                 "\nNumero Da Conta: " + this.getNumeroConta() +
                 "\nTipo de Conta" + this.getTipo() +
