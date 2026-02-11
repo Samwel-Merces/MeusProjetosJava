@@ -71,23 +71,71 @@ public class Main {
                 JOptionPane.ERROR_MESSAGE
                );
             }
-            
-            
-
-            
-
-            
-
-
-            
-            
-            
+                
             break;
         case 1:
+            while (true) { 
+
+            try {
+               
+                String input = JOptionPane.showInputDialog(null, "Digite o Valor Do Deposito");
+
+                        if(input == null || input.isBlank()){
+                         JOptionPane.showMessageDialog(null,"Deposito Cancelado");
+                         break;
+                               
+                        } 
+                input = input.replace(",",".");
+                
+                float valor = Float.parseFloat(input);
+                c1.depositar(valor);
+                JOptionPane.showMessageDialog(null, "Deposito no Valor de R$" + " Realizado Com Sucesso!");
+                break;
+
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Erro!! Digite Um Valor Valido");    
+            } catch (IllegalArgumentException | IllegalStateException e) {
+               JOptionPane.showMessageDialog(
+                null,
+                e.getMessage(),
+                "Erro",
+                JOptionPane.ERROR_MESSAGE
+               ); 
             
+               }
+            }
             break;
         case 2:
+            while (true) { 
+
+            try {
+                String input = JOptionPane.showInputDialog(null, "Digite o Valor Do Saque");
+
+                        if(input == null || input.isBlank()){
+                         JOptionPane.showMessageDialog(null,"Saque Cancelado");
+                         break;
+                               
+                        } 
+                input = input.replace(",",".");
+                
+                float valor = Float.parseFloat(input);
+                c1.sacar(valor);
+                JOptionPane.showMessageDialog(null, "Saque no Valor de ");
+                break;
+                        
+
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Erro!! Digite Um Valor Valido");    
+            } catch (IllegalArgumentException | IllegalStateException e) {
+               JOptionPane.showMessageDialog(
+                null,
+                e.getMessage(),
+                "Erro",
+                JOptionPane.ERROR_MESSAGE
+               ); 
             
+               }
+            }
             break;
         case 3:
             JOptionPane.showMessageDialog(null, c1.exibirDetalhes());
@@ -100,9 +148,11 @@ public class Main {
             JOptionPane.showMessageDialog(null,
             "Encerrando Programa....");
             cont = false;
-    }
-        
+
+
+            }
+        }
         
     }
 }
-}
+
