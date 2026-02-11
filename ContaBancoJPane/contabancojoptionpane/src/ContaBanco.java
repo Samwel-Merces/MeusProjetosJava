@@ -21,8 +21,11 @@ public class ContaBanco {
             throw new IllegalArgumentException("Erro! Conta Inativa");
         }
 
-        if(valor <=0 || valor > this.saldo){
+        if(valor <=0){
             throw new IllegalArgumentException("Erro! Valor de Saque invalido");
+        }
+        if(valor > this.saldo){
+            throw new IllegalArgumentException("Saldo Insuficiente!");
         }
 
         this.setSaldo(this.getSaldo() - valor);
@@ -103,8 +106,10 @@ public class ContaBanco {
 
     if (tipo.equalsIgnoreCase("CC")) {
         this.tipo = "CC";
+        this.saldo = 50;
     } else if (tipo.equalsIgnoreCase("CP")) {
         this.tipo = "CP";
+        this.saldo = 150;
     } else {
         throw new IllegalArgumentException("Tipo de conta inválido (use CC ou CP)");
     }

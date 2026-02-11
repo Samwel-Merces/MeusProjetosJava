@@ -41,7 +41,7 @@ public class Main {
              String tpv [] = {"Conta Poupança", "Conta Corrente"};
             
             int op2 = JOptionPane.showOptionDialog(null,
-            "",
+            "Receba um Bonus\nPoupança R$150\nCorrente R$50",
             "Escolha o Tipo de Conta",
             JOptionPane.DEFAULT_OPTION,
             JOptionPane.QUESTION_MESSAGE,
