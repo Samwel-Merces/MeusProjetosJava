@@ -89,7 +89,7 @@ public class Main {
                 
                 float valor = Float.parseFloat(input);
                 c1.depositar(valor);
-                JOptionPane.showMessageDialog(null, "Deposito no Valor de R$" + " Realizado Com Sucesso!");
+                JOptionPane.showMessageDialog(null, "Deposito no Valor de R$" + valor + " Realizado Com Sucesso!");
                 break;
 
             } catch (NumberFormatException e) {
@@ -120,7 +120,7 @@ public class Main {
                 
                 float valor = Float.parseFloat(input);
                 c1.sacar(valor);
-                JOptionPane.showMessageDialog(null, "Saque no Valor de ");
+                JOptionPane.showMessageDialog(null, "Saque no Valor de R$" + valor + " Realizado Com Sucesso!");
                 break;
                         
 
@@ -138,10 +138,30 @@ public class Main {
             }
             break;
         case 3:
-            JOptionPane.showMessageDialog(null, c1.exibirDetalhes());
+            try {
+                JOptionPane.showMessageDialog(null, c1.exibirDetalhes());   
+            } catch (IllegalStateException e) {
+                JOptionPane.showMessageDialog(null,
+                e.getMessage(),
+                "ERRo!",
+                JOptionPane.ERROR_MESSAGE
+                );
+            }
+            
             
             break;
         case 4:
+            try {
+                c1.fecharConta();
+                JOptionPane.showMessageDialog(null, "Conta Fechada Com Sucesso!","ATENÇÃO",JOptionPane.WARNING_MESSAGE);
+        
+            } catch (IllegalStateException e) {
+                JOptionPane.showMessageDialog(null,
+                    e.getMessage(),
+                "ERRO!",
+            JOptionPane.ERROR_MESSAGE
+            );
+            }
             
             break;
         default:

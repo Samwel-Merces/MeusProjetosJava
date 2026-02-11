@@ -52,20 +52,32 @@ public class ContaBanco {
     }
 
     public String exibirDetalhes(){
-        String aux;
+        if(!this.ativo){
+            throw new IllegalStateException("Conta Inativa");
+        }
+
+        String aux, aux2;
         aux = this.ativo ? "Ativa" : "Desativada";
+        aux2 = this.tipo.equalsIgnoreCase("CC") ? "Conta Corrente" : "Conta Poupança";
        
         return "Titular da Conta: " + this.getTitular() +
                 "\nNumero Da Conta: " + this.getNumeroConta() +
-                "\nTipo de Conta" + this.getTipo() +
+                "\nTipo de Conta: " + aux2 +
                 "\nSaldo da Conta: R$" + this.getSaldo() +
                 "\nStatus da Conta: " + aux; 
     }
 
 
+    public void fecharConta(){
+        if(!this.ativo){
+            throw new IllegalStateException("Conta Já está Inativa");
+        }
+        this.setAtivo(false);
+
+    }
+
+
     //METODOS ESPECIAIS
-
-
 
     public String getTitular() {
         return titular;
