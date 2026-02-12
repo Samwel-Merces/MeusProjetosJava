@@ -139,9 +139,5 @@ public class ContaBanco {
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
-
-
-
-    
     
 }
